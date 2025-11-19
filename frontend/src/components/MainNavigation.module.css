@@ -1,0 +1,24 @@
+.header {
+  display: flex;
+  justify-content: center;
+  max-width: 60rem;
+  margin: auto;
+  padding: 2rem;
+}
+.list {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+.list a {
+  text-decoration: none;
+  color: var(--color-primary-400);
+}
+.listItem{
+    list-style: none;
+}
+.list a:hover,
+.list a.active {
+  color: var(--color-primary-800);
+  
+}

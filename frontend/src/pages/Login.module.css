@@ -1,0 +1,100 @@
+/* body{
+    margin: 0;
+    padding: 0;
+    font-family: "Inter", arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+.formsWrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+
+}
+.inputLabelWrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.inputLabel{
+    display: flex;
+    gap: 12px;
+}
+.btn{
+    text-align: center;
+} */
+
+/* GLOBAL STYLES */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", Arial, sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+  box-sizing: border-box;
+}
+
+/* LOGIN PAGE LAYOUT */
+.formsWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: start; /* vertical centering */
+  height: 100vh;
+  padding: 20px;
+  margin-bottom: 400px;
+}
+
+/* FORM CARD */
+.formCard {
+  background: #fff;
+  padding: 24px;
+  width: 100%;
+  max-width: 380px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* LABEL + INPUT GROUP */
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.inputGroup label{
+    font-size: 14px;
+    font-weight: 500;
+    color: #222;
+}
+.inputGroup input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 10px;
+}
+
+/* BUTTON */
+.btn {
+  padding: 12px;
+  background-color: #1a73e8;
+  color: white;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+  font-size: 16px;
+  text-align: center;
+}
+
+.btn:hover {
+  background-color: #135fc4;
+}
+
+
+

@@ -1,11 +1,6 @@
 import express from "express";
 const router = express.Router();
-
-const postLoginRoute= router.post("/login",(req, res, next)=>{
-    res.status(200).json({
-        userName: "My name",
-        password: "myPasse"
-    })
-})
+import loginController from "../controller/loginAuth.js"
+const postLoginRoute= router.post("/api/auth/login",loginController)
 
 export default postLoginRoute;

@@ -1,12 +1,7 @@
 import express from "express";
 const router = express.Router();
-
-
-const postRegisterRoute=router.post("/register", (req, res, next)=>{
-
-    res.status(200).json({
-        registers: "Yes it is register"
-    })
-})
+import {signupController} from "../controller/signupAuth.js"
+//post route with endpoit api/auth/signup
+const postRegisterRoute= router.post("/api/auth/signup", signupController)
 
 export default postRegisterRoute
