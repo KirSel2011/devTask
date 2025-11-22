@@ -1,45 +1,82 @@
 import { useState } from "react"
+import classes from "./Signup.module.css"
+export default function signupPage(){
 
-const [userInput, setUserInput]= useState({
+    const [userInput, setUserInput]= useState({
     name: "",
     email: "",
     password: ""
 })
-
-function handleUserInput(identifier, event){
-    event.prevetnDefault();
+const [userData, setUserData]= useState({})
+//handle userinput on input change
+function handleOnChange(identifier, event){
     setUserInput((prev)=>{
        return { ...prev,
-             [identifier]: event.value
+             [identifier]: event.target.value
        }
     })
 }
-export default function signupPage(){
-    return <form action='/login' method="POST" onSubmit={handleUserInput}>
-          <label htmlFor="name">name</label>
+// handle submit on button click
+async function handleSubmit(e){
+    e.preventDefault();
+    console.log("Signup page userName: ", userInput.name, "", userInput.password);
+const user={ 
+       name: userInput.name,
+       email: userInput.email,
+       password: userInput.password
+    };
+    console.log("From signup page: ",user);
+    const response = await fetch("http://localhost:3000/api/auth/signup",{
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body:JSON.stringify(user)
+
+    });
+    if(!response.ok){
+        console.log("error message ", response.status);
+        return;
+    }
+    const data = await response.json();
+    console.log("if response ok data at the frontend is valid: ", data.message);
+    console.log(" Frontend Fetch signup recieved from Backend ...", data.user);
+     setUserData(data);
+     
+}
+    return <form className={classes.formWrapper} method="POST" onSubmit={handleSubmit}>
+         <div className={classes.formCard}>
+            <div className={classes.inputGroup} >
+                 <label htmlFor="name">Name</label>
           <input 
                type="text" 
                name= "name"
                id="name"
                value={userInput.name}
-               onChange = {(event)=>handleUserInput("name", event)}
+               onChange = {(event)=>handleOnChange("name", event)}
             />
-          <label htmlFor="password">password</label>
+         </div>
+          <div className={classes.inputGroup} >
+            <label htmlFor="password">Password</label>
           <input 
                type="password" 
                name='password' 
                id="password"
                value= {userInput.password}
-               onChange={(event)=>handleUserInput("password", event.value)}
+               onChange={(event)=>handleOnChange("password", event)}
           />
-          <label htmlFor="email">Email</label>
+          </div>
+         <div className={classes.inputGroup} >
+             <label htmlFor="email">Email</label>
           <input 
                type="text" 
                name='email' 
                id="email" 
                 value={userInput.email}
-                onChange={(event)=>handleUserInput("email", event.value)}
+                onChange={(event)=>handleOnChange("email", event)}
                />
-        <button type="submit">Login</button>
+         </div>
+            <button className={classes.btn} type="submit">Login</button>
+         </div>
     </form>
 }

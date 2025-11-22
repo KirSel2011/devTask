@@ -1,37 +1,79 @@
 import { useState } from "react"
-
-const [userInput, setUserInput]= useState({
+import style from "./Login.module.css"
+export default function LoginPage(){
+   const [userInput, setUserInput]= useState({
     email: "",
     password: ""
-})
+});
+const [token, setLoginToken]= useState(()=>{
+  return localStorage.getItem("token") || null
+});
 
-function handleUserInput(identifier, event){
-    event.prevetnDefault();
+function handleOnChange(identifier, event){
     setUserInput((prev)=>{
        return { ...prev,
-             [identifier]: event.value
+             [identifier]: event.target.value
        }
     })
-}
-export default function LoginPage(){
-    return <form action='/login' method="POST" onSubmit={handleUserInput}>
-         <label htmlFor="email">Email</label>
+};
+async function handleOnSubmit(e){
+      e.preventDefault();
+      console.log("Login handleSubmit function: ", userInput.email ,  " :",   userInput.password)
+      const user = { 
+                         email: userInput.email, 
+                         password: userInput.password
+                  };
+
+  const response = await fetch("http://localhost:3000/api/auth/login",{
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "authorization": (token)? `Bearer ${token}`: " "
+        },
+        body:JSON.stringify(user)
+    });
+      if(!response.ok){
+        console.log("Error message : ", response.status);
+      }
+      const data = await response.json();
+      console.log("successfully login data at the frontend is valid: ", data.message);
+    console.log(" Frontend Fetch login recieved from Backend ...", data.user);
+        const tokenPass = data.token;
+         const saveToken =(tokenPass)=>{
+               localStorage.setItem("token", tokenPass);
+               setLoginToken(tokenPass);
+         }
+         saveToken(tokenPass)
+        
+};
+    return <div className={style.formsWrapper}> 
+        <form className={style.formCard}  method="POST" onSubmit={handleOnSubmit}>
+          <div className={style.inputGroup} >
+           
+                 <label htmlFor="email">Email</label>
           <input 
                type="text" 
                name='email' 
                id="email" 
                value={userInput.email}
-               onChange={(event)=>handleUserInput("email", event.value)}
+               onChange={(event)=>handleOnChange("email", event)}
                />
-          <label htmlFor="password">password</label>
+           
+            
+                  <label htmlFor="password">Password</label>
           <input 
                type="password" 
                name='password' 
                id="password"
                value= {userInput.password}
-               onChange={(event)=>handleUserInput("password", event.value)}
+               onChange={(event)=>handleOnChange("password", event)}
           />
           
-        <button type="submit">Login</button>
-    </form>
+        <div className={style.btn}>
+            <button type="submit">Login</button>
+        </div>  
+        
+          </div>
+        </form>
+    </div>
 }
