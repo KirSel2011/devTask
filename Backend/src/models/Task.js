@@ -2,10 +2,12 @@ import mongoose from "mongoose";
 
 const taskSchema = new mongoose.Schema({
      title: {type: String,  required: true},
-     status: {type: String, required: true, enum: ["todo", "progress", "completed"], defautl: "todo"},
-     assignedTO:{type: mongoose.Schema.Types.ObjectId, ref:"User"},
-     createdBy: {type: mongoose.Schema.Types.ObjectId, ref: "User"},
+     description: {type: String},
+     status: {type: String, required: true, enum: ["todo", "inprogress", "complete", 'pending'], default: "todo"},
+     assignedTo:{type: mongoose.Schema.Types.ObjectId, ref:"User"},
+     createdBy: {type: mongoose.Schema.Types.ObjectId, ref: "User", required: true},
+     dueDate: {type: Date}
 }, {timestamps:true}
 )
 
-export default taskSchema.model("Task", taskSchema)
+export default mongoose.model("Task", taskSchema)

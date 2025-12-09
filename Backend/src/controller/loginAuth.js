@@ -12,11 +12,13 @@ const loginController = async(req, res, next)=>{
         //console.log("Login Debug:if(!password || !email) This passes the password and email exist!");
         // to verify if the password exist in the user database
         const user = await User.findOne({email});
+        console.log("Login Backend user data extracted from database: ", user);
         if(!user){
             return res.status(400).json({message:"Invalid Credential: password does not exist"})
         }
          const retToken = jwtUtility(user);
         
+         console.log(" Debug: Token created backend @loginController using current user & send Frontend: ", retToken);
         //compare the password with hash password
         const isMatch = await bcrypt.compare(password, user.passwordHash )
         if(!isMatch){
