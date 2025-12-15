@@ -1,10 +1,11 @@
 import {useEffect} from "react"
  import { useState } from "react";
 import {useNavigate} from "react-router-dom"
- const token = localStorage.getItem('token');
+import classes from "./Dashboard.module.css"
  function DashBoardPage(){
  const [boardState, setBoardState]= useState(" ");
  const navigate = useNavigate();
+const token = localStorage.getItem('token');
 useEffect(()=>{
   const dashBoard = async()=>{
     try{
@@ -32,10 +33,11 @@ useEffect(()=>{
 
    
     console.log("Output in dashboard from bandend dashboard: ", boardState);
-    return <div>
+    return <div className={classes.board}>
          <h1>{boardState.title}</h1>
          <p>{boardState.name}</p>
-         <p>{boardState.status}</p>
+          <p>{boardState.tasks}</p>
+         <p>{boardState.statusTask}</p>
     </div>
 }
 export default DashBoardPage;

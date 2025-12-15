@@ -17,7 +17,7 @@ const jwtUtility = (user) => {
   console.log("What is the Secret for singing for login credential: ", SECRETJWT);
   console.log("Destructuring OK:", _id, name, email);
     const token =  jwt.sign(payload, SECRETJWT, {
-      expiresIn: "0.1hr",
+      expiresIn: "1hr",
       issuer: "devTask"
     })
 

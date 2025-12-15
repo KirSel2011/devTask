@@ -1,5 +1,6 @@
 import { useState } from "react"
 import classes from "./Signup.module.css"
+import { useNavigate } from "react-router"
 export default function signupPage(){
 
     const [userInput, setUserInput]= useState({
@@ -8,6 +9,7 @@ export default function signupPage(){
     password: ""
 })
 const [userData, setUserData]= useState({})
+const navigate = useNavigate();
 //handle userinput on input change
 function handleOnChange(identifier, event){
     setUserInput((prev)=>{
@@ -26,7 +28,8 @@ const user={
        password: userInput.password
     };
     console.log("From signup page: ",user);
-    const response = await fetch("http://localhost:3000/api/auth/signup",{
+    try{
+             const response = await fetch("http://localhost:3000/api/auth/signup",{
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -41,8 +44,13 @@ const user={
     const data = await response.json();
     console.log("if response ok data at the frontend is valid: ", data.message);
     console.log(" Frontend Fetch signup recieved from Backend ...", data.user);
+      console.log(" Frontend Fetch signup recieved...id...from Backend ...", data.id);
      setUserData(data);
      
+    }catch(error){
+      console.log("Error: resource not found")
+    }
+   navigate('/login')
 }
     return <form className={classes.formWrapper} method="POST" onSubmit={handleSubmit}>
          <div className={classes.formCard}>
@@ -76,7 +84,7 @@ const user={
                 onChange={(event)=>handleOnChange("email", event)}
                />
          </div>
-            <button className={classes.btn} type="submit">Login</button>
+            <button className={classes.btn} type="submit">Submit</button>
          </div>
     </form>
 }

@@ -1,22 +1,39 @@
 .header {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   max-width: 60rem;
   margin: auto;
   padding: 2rem;
 }
+
 .list {
   display: flex;
   justify-content: center;
   gap: 2rem;
+  flex-wrap: wrap;
 }
+@media (max-width: 600px) {
+  .list {
+    gap: 1rem;
+  }
+}
+@media (max-width: 400px) {
+  .list {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
 .list a {
   text-decoration: none;
+  list-style: none;
   color: var(--color-primary-400);
 }
 .listItem{
     list-style: none;
 }
+
 .list a:hover,
 .list a.active {
   color: var(--color-primary-800);

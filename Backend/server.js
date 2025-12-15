@@ -9,7 +9,7 @@ import healthCheckRoute from "./src/routes/healthRoutes.js"
 import postLoginRoute from "./src/routes/loginRoutes.js"
 import postRegisterRoute from "./src/routes/registerRoutes.js"
 import dashBoardRoutes from "./src/routes/dashBoardRoutes.js"
-import profileRoutes from "./src/routes/profileRoutes.js";
+import {getUserProfileRoute, postUserProfileRoute, updateProfileRoute, deleteProfileRoute} from "./src/routes/profileRoutes.js";
 import userRoute from "./src/routes/usersRoutes.js"
 import { getTaskRoute,  postTaskRoute, deleteTaskRoute, putTaskRoute } from "./src/routes/taskRoute.js";
 import User from "./src/models/User.js"
@@ -50,10 +50,10 @@ const jwtMiddleware= (req, res, next)=>{
                     return;
                 } 
                 req.user= user;   //attach decoded payload to req object
-                console.log("jwtMiddleware (req.user= user)extracted user of database using Token backend: ", req.user)
-                console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ID@@@@@@@@@@@@@@@@@@: ", req.user.id)
+                // console.log("jwtMiddleware (req.user= user)extracted user of database using Token backend: ", req.user)
+                 console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ID@@@@@@@@@@@@@@@@@@: ", req.user.id)
                 req.token= token;  //attach string token to req object
-                console.log("What is generated token: ")
+                // console.log("What is generated token: ")
                 next();          //proceed to next middleware
             })
     }
@@ -63,7 +63,10 @@ app.use(healthCheckRoute);
 app.use('/api/auth', postLoginRoute);
 app.use('/api/auth', postRegisterRoute);
 app.use(userRoute)
-app.use(jwtMiddleware, profileRoutes);
+app.use('/api/user/profile',jwtMiddleware, postUserProfileRoute);
+app.use('/profile',jwtMiddleware, getUserProfileRoute);
+app.use('/api/profile/update',jwtMiddleware, updateProfileRoute)
+app.use('/api/profile/delete',jwtMiddleware,deleteProfileRoute)
 app.use('/api', jwtMiddleware, postTaskRoute);
 app.use('/api/tasks',jwtMiddleware, getTaskRoute )
 app.use('/api/tasks/update', jwtMiddleware, putTaskRoute);
