@@ -1,0 +1,45 @@
+.kanban-card{
+      background: white;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      box-shadow: "0px 2px 4px rgba(0,0,0,0.1)"
+
+}
+.listBtnWrapper{
+     display:flex;
+     gap: 5px;
+    
+}
+.editBtn {
+  
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background: white;
+  /* color: #333; */
+  color: #007bff ;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.editBtn:hover {
+  background: #f4f4f4;
+  border-color: #888;
+   box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+  transform: translateY(-2px);
+}
+.deleteBtn {
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s;
+  border-color: white;
+  color: #ff4d4d;
+}
+
+.deleteBtn:hover {
+  background: #ff4d4d;
+  color: white;
+}

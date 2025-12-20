@@ -1,0 +1,12 @@
+.tasklistWrapper{
+   display: flex;
+   justify-content: space-between;
+   padding: 10px;
+  
+}
+.tableHeader{
+   
+  background-color: cyan;
+  text-align: center;
+  
+}

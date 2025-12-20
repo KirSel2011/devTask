@@ -1,0 +1,27 @@
+.btnWrapper{
+    display: flex;
+    gap: 10px;
+   justify-content: center;
+    padding: 10px 16px;
+}
+.listBtn{
+ border-radius: 6px;
+ /* border: 1px solid #ccc; */
+ transition: 0.25s ease;
+ cursor: pointer;
+ background: #007bff;
+ color: white;
+ font-weight: 600px;
+ 
+
+}.kanbanBtn{
+  cursor: pointer;
+   border-radius: 6px;
+  background: #005fcc;
+  transform: scale(1.05);
+
+}
+.kanbanBtn:hover {
+  box-shadow: 0 4px 10px rgba(0,0,0,0.18);
+  transform: translateY(-2px);
+}
