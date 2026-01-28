@@ -39,4 +39,21 @@
 .deleteBtn:hover {
   background: #ff4d4d;
   color: white;
+}.tableRow td {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+  color: #333;
+  padding: 8px 12px;
+  border-bottom: 1px solid #eee;
+}
+.tableRow:hover {
+  background: #f0f8ff; /* subtle highlight for row selection */
+  cursor: pointer;
+}
+.actionsCell {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  min-width: 90px;
 }

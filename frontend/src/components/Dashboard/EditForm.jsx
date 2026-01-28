@@ -1,10 +1,12 @@
 import classes from "./EditForm.module.css"
 import { useEffect, useState } from "react"
-import Input from "../../../pages/Input.jsx"
-import { useNavigate } from "react-router-dom";
+// import Input from "../../../pages/Input.jsx"
+import Input from "../../pages/Input.jsx";
+import { useNavigate, useParams } from "react-router-dom";
 //EditForm recieves task as a prop task
-export default function EditForm({task}){
+export default function EditForm({task, setEditing, setTaskState}){
 const token = localStorage.getItem('token');
+console.log("Incoming task from taskCard in EditTaskForm:  ", task)
 const [taskInput, setTaskInput]= useState({
   title: task?.title || "",
   description: task?.description || "",
@@ -16,23 +18,26 @@ const [taskInput, setTaskInput]= useState({
 const navigate = useNavigate();
 const [users, setUsers]= useState([])
  const [loading, setLoading]= useState(false)
- 
- let id = task._id;
+ const id = task._id;
+ console.log("++++EditForm update checkup for id:+++++ ", id)
     useEffect(()=>{
             setTaskInput(task)
     }, [task])
   useEffect(()=>{
   async function fetchUsers(){
+    
       try{
             const response = await fetch('http://localhost:3000/api/users', {
          headers: {
                  "authorization": `Bearer ${token}`
             }
       })
+    
       if(!response.ok){
         console.log("Error message: ", response.status);
       }
         const userData =await response.json();
+        
         setUsers(userData);
       }catch(error){
         console.log("Something went wrong!")
@@ -60,6 +65,7 @@ const [users, setUsers]= useState([])
     }
  
         async function handleEditSubmit(e){
+        console.log("Before submitting update task to backend ")
          e.preventDefault();   
         setLoading(true);
      
@@ -70,6 +76,9 @@ const [users, setUsers]= useState([])
             assignedTo:taskInput.assignedTo,
             dueDate: taskInput.dueDate
      }
+     console.log("during submitting update task to backend ")
+     console.log("Frontend submission taskObject is here: ", task)
+     console.log(" Before onTheTop fetch KanbanBoard editForm Rediculous: ")
       try{
              const response = await fetch(`http://localhost:3000/api/tasks/update/${id}`,{
                 method: "PUT",
@@ -79,17 +88,21 @@ const [users, setUsers]= useState([])
             },
             body: JSON.stringify(task)
         })
+          console.log(" Before fetch KanbanBoard editForm Rediculous: ")
         if(!response.ok){
             console.log("resources not found in the server: ",response.status);
         }
 
         const data = response.json();
+        console.log(" after fetch KanbanBoard editForm Rediculous: ")
         console.log("Edit component message returned from backend: ",data.message);
       }catch(error){
         console.log("Something went wrong during submission the task!")
       }
-
+      console.log("Before submitting update task to backend ")
+      setTaskState(task);
       setLoading(false)
+      setEditing(false)
     }
 
     return <form onSubmit={(e)=>handleEditSubmit(e)} method="PUT">

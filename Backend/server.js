@@ -13,6 +13,7 @@ import {getUserProfileRoute, postUserProfileRoute, updateProfileRoute, deletePro
 import userRoute from "./src/routes/usersRoutes.js"
 import { getTaskRoute,  postTaskRoute, deleteTaskRoute, putTaskRoute } from "./src/routes/taskRoute.js";
 import User from "./src/models/User.js"
+import { postSuggestTask } from "./src/routes/suggestTaskRoute.js";
 
 
 dotenv.config()  // Load environment variables from .env
@@ -67,11 +68,12 @@ app.use('/api/user/profile',jwtMiddleware, postUserProfileRoute);
 app.use('/profile',jwtMiddleware, getUserProfileRoute);
 app.use('/api/profile/update',jwtMiddleware, updateProfileRoute)
 app.use('/api/profile/delete',jwtMiddleware,deleteProfileRoute)
-app.use('/api', jwtMiddleware, postTaskRoute);
+app.use('/api/tasks', jwtMiddleware, postTaskRoute);
 app.use('/api/tasks',jwtMiddleware, getTaskRoute )
 app.use('/api/tasks/update', jwtMiddleware, putTaskRoute);
 app.use('/api/tasks/delete',jwtMiddleware, deleteTaskRoute);
 app.use( jwtMiddleware, dashBoardRoutes );
+app.use("/api", jwtMiddleware, postSuggestTask)
 
 //connect to database and start server
 async function startServer(){

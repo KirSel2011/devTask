@@ -10,14 +10,22 @@
      display:flex;
      gap: 5px;
     
+}.taskDescription{
+   padding: 10px;
+   margin: 10px 0;
+   background: #fff;
+   border-radius: 5px;
+   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 .editBtn {
   
+  background-color: #f1c40f;
+  color: white;
   border-radius: 4px;
   border: 1px solid #ccc;
-  background: white;
+  /* background: white; */
   /* color: #333; */
-  color: #007bff ;
+  /* color: #007bff ; */
   font-size: 14px;
   cursor: pointer;
   transition: 0.2s;
@@ -26,6 +34,7 @@
 .editBtn:hover {
   background: #f4f4f4;
   border-color: #888;
+  color: bisque;
    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
   transform: translateY(-2px);
 }
@@ -35,11 +44,34 @@
   font-size: 14px;
   cursor: pointer;
   transition: 0.2s;
-  border-color: white;
-  color: #ff4d4d;
+  background: #ff4d4d;
+  color: white;
 }
 
 .deleteBtn:hover {
-  background: #ff4d4d;
+
+  background-color: white;
+    border-color: white;
+  color: #ff4d4d;
+}
+.actions button {
+  margin-left: 8px;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+}
+.viewBtn {
+  background-color: #3498db;
   color: white;
+   border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.viewBtn:hover {
+  background-color:white;
+  color: black
 }

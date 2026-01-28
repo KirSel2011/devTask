@@ -1,47 +1,47 @@
 import { Link } from "react-router-dom";
 import classes from "./MainNavigation.module.css";
-import {jwtDecode} from "jwt-decode"; // namespace import for Vite
-
+import { useAuth } from  '../AuthProvider/AuthContext.jsx'
+import { useParams } from "react-router-dom";
 function MainNavigation() {
-  const token = localStorage.getItem("token");
-  let userId = null;
-  if (token) {
-    try {
-      const decode= jwtDecode(token); // use .default with Vite
-      userId = decode.id; // assuming your token payload has `id`
-    } catch (error) {
-      console.error("Invalid token:", error);
-      localStorage.removeItem("token");
-    }
-  }
-console.log("userId in MainNavigation is : ", userId);
+ const {isAuthenticated, user, login, logout}= useAuth();
+ const {id}= useParams();
+ console.log("main Navigation: ", id)
   return (
     <header className={classes.header}>
       <nav>
         <ul className={classes.list}>
+          {(!isAuthenticated)? (<>
+            <li className={classes.listItem}>
+            <Link to="/signup">Signup</Link>
+          </li>
           <li className={classes.listItem}>
+            <Link to="/login">Login</Link>
+          </li>
+          </>) :(<>
+            <li className={classes.listItem}>
             <Link to="/profileform">Create Profile</Link>
           </li>
           <li className={classes.listItem}>
             <Link to="/profile">Profile</Link>
           </li>
           <li className={classes.listItem}>
+           {/* {isAuthenticated && <Link to="/dashboard">Dashboard</Link>} */}
             <Link to="/dashBoard">DashBoard</Link>
           </li>
-          {userId && (
+          {user.id && (
             <li className={classes.listItem}>
-              <Link to={`/tasks/${userId}`}>TaskPage</Link>
+              <Link to={`/tasks/${user.id}`}>TaskPage</Link>
             </li>
           )}
           <li className={classes.listItem}>
             <Link to="/task/new">CreateTask</Link>
           </li>
-          <li className={classes.listItem}>
-            <Link to="/signup">Signup</Link>
-          </li>
-          <li className={classes.listItem}>
-            <Link to="/login">Login</Link>
-          </li>
+          <button className={classes.logoutBtn} onClick={logout}>
+             logout
+          </button>
+          </>)}
+          
+          
         </ul>
       </nav>
     </header>

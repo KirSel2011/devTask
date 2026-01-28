@@ -1,27 +1,62 @@
-.btnWrapper{
-    display: flex;
-    gap: 10px;
-   justify-content: center;
-    padding: 10px 16px;
+.btnWrapper {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  padding: 10px 16px;
+  background: #eaeaea; /* subtle background for the toggle area */
+  border-radius: 8px;
 }
-.listBtn{
- border-radius: 6px;
- /* border: 1px solid #ccc; */
- transition: 0.25s ease;
- cursor: pointer;
- background: #007bff;
- color: white;
- font-weight: 600px;
- 
+.dashboardHeader{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}.dashboardHeader h1 {
+  margin: 0;
+}
 
-}.kanbanBtn{
+.dashboardHeader p {
+  margin: 0;
+}
+.listBtn,
+.kanbanBtn {
+  padding: 6px 16px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  font-weight: 600;
   cursor: pointer;
-   border-radius: 6px;
-  background: #005fcc;
-  transform: scale(1.05);
-
+  transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  font-size: 14px;
 }
+
+/* inactive state */
+.listBtn {
+  background: transparent;
+  color: #444; /* dark text */
+}
+
+.kanbanBtn {
+  background: transparent;
+  color: #444;
+}
+
+/* active state */
+.listBtn.active {
+  background: #ffffff;
+  border: 1px solid #2563eb; /* blue accent */
+  color: #2563eb;
+}
+
+.kanbanBtn.active {
+  background: #ffffff;
+  border: 1px solid #2563eb;
+  color: #2563eb;
+}
+
+/* hover effect for both */
+.listBtn:hover,
 .kanbanBtn:hover {
-  box-shadow: 0 4px 10px rgba(0,0,0,0.18);
-  transform: translateY(-2px);
+  background: #f0f0f0;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }

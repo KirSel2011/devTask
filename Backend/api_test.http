@@ -1,0 +1,82 @@
+
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5NGI5MjRjMTRiZmJlZTQxOTg2MjMyMCIsIm5hbWUiOiJlbXBsb3llZTMiLCJlbWFpbCI6ImVtcGxveWVlM0BnbWFpbC5jb20iLCJpYXQiOjE3NjgzMjA0NjcsImV4cCI6MTc2ODMyNDA2NywiaXNzIjoiZGV2VGFzayJ9.vlBUYR_3wT5e-g0zPTa0jO84tOdsnK0i9ucaXWUkigo
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "employee3@gmail.com",
+  "password": "employee3"
+}
+### Create a new task
+### Create task
+POST http://localhost:3000/api/tasks
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "title": "Daily Standup",
+  "description": "Team meeting",
+  "status": "todo",
+  "assignedTo": "695ba48fa7a8f240fef43edf",
+  "dueDate": "2025-12-23"
+}
+
+
+
+
+### Get all tasks
+GET http://localhost:3000/api/tasks
+Content-Type: application/json
+authorization: Bearer {{token}}
+
+### Update a task
+PUT http://localhost:3000/api/tasks/update/695ba48fa7a8f240fef43edf
+Content-Type: application/json
+authorization: Bearer {{token}}
+
+{
+  "title": "loginTask Okay",
+  "description": "it is new task added again",
+  "status": "todo",
+  "dueDate": "2026-06-06",
+  "assignedTo": "695ba48fa7a8f240fef43edf"
+}
+
+### Delete a task
+DELETE http://localhost:3000/api/tasks/695ba48fa7a8f240fef43edf
+authorization: Bearer {{token}}
+
+### Create profile
+POST http://localhost:3000/api/user/profile
+Content-Type: application/json
+authorization: Bearer {{token}}
+
+{ 
+          "firstName": "employee3",
+          "lastName": "employee3",
+          "role": "developer",
+          "bio": "It is a designer and developer"
+  }
+  
+### Get profile
+GET http://localhost:3000/profile
+Content-Type: application/json
+authorization: Bearer {{token}}
+
+
+### Update profile
+PUT http://localhost:3000/profile/69667581ce167226a6b01ece
+Content-Type: application/json
+authorization: Bearer {{token}}
+
+{ 
+          "firstName": "employee3",
+          "lastName": "Owner",
+          "role": "admin",
+          "bio": "Adminstrator developer teams"
+  }
+
+### Delete profile
+Delete http://localhost:3000/profile/694c674214bfbee41986251b
+authorization: Bearer {{token}}
+

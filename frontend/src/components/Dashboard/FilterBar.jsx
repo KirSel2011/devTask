@@ -10,6 +10,7 @@ export default function FilterBar({
   setSortAsc,
   users
 }) {
+  console.log("Users in FilterBar component: ", users);
   return (
     <div className={classes.filterBar}>
       {/* SEARCH */}
@@ -37,8 +38,8 @@ export default function FilterBar({
       >
         <option value="">All Users</option>
         {users.map(user => (
-          <option key={user.id} value={user.id}>
-            {user.assignedTo}
+          <option key={user._id} value={user._id}>
+            {user.name}
           </option>
         ))}
       </select>

@@ -1,12 +1,123 @@
-.tasklistWrapper{
-   display: flex;
-   justify-content: space-between;
-   padding: 10px;
-  
+
+/* ------------------------------------------------------------------------------------------  */
+
+/* =========================
+   WRAPPER
+========================= */
+.tasklistWrapper {
+  width: 100%;
+  overflow-x: auto;
+  padding: 0 10px 10px;
 }
-.tableHeader{
-   
-  background-color: cyan;
+
+/* =========================
+   TABLE BASE
+========================= */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed; /* REQUIRED for ellipsis */
+}
+
+/* =========================
+   HEADERS
+========================= */
+.tableHeader th {
+  font-weight: 600;
+  background: #f7f7f7;
+  font-size: 13px;
+  padding: 8px 12px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+/* =========================
+   ROWS
+========================= */
+.taskrow td {
+  font-size: 13px;
+  padding: 8px 12px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+  /* default truncation */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Description can wrap */
+.taskrow td:nth-child(2) {
+  white-space: normal;
+  word-break: break-word;
+}
+.empty {
+  font-size: 13px;
+  color: #888;
   text-align: center;
-  
+}
+/* Actions column */
+.actionsCell {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  min-width: 90px;
+}
+/* .listBtnWrapper {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+
+}
+
+.editBtn,
+.deleteBtn {
+  font-size: 12px;
+  padding: 4px 8px;
+} */
+
+/* @media (max-width: 768px) {
+  .taskrow td {
+    padding: 6px 8px;
+    font-size: 12px;
+  }
+} */
+
+/*  Description 
+td:nth-child(2) {
+  white-space: normal;
+  word-break: break-word;
+} */
+/* =========================
+   DESKTOP COLUMN WIDTHS
+========================= */
+th:nth-child(1), td:nth-child(1) { width: 15%; } /* Title */
+th:nth-child(2), td:nth-child(2) { width: 30%; } /* Description */
+th:nth-child(3), td:nth-child(3) { width: 15%; } /* Status */
+th:nth-child(4), td:nth-child(4) { width: 10%; } /* Due Date */
+th:nth-child(5), td:nth-child(5) { width: 15%; } /* Assigned */
+th:nth-child(6), td:nth-child(6) { width: 15%; } /* Actions */
+
+/* =========================
+   MOBILE (≤ 600px)
+========================= */
+@media (max-width: 600px) {
+
+  /* Hide low-priority columns */
+  .colDescription,
+  .colAssigned,
+  th:nth-child(4),
+  td:nth-child(4) {
+    display: none;
+  }
+
+  /* Resize remaining columns */
+  th:nth-child(1), td:nth-child(1) { width: 40%; } /* Title */
+  th:nth-child(3), td:nth-child(3) { width: 30%; } /* Status */
+  th:nth-child(6), td:nth-child(6) { width: 30%; } /* Actions */
+
+  /* Compact text */
+  .taskrow td,
+  .tableHeader th {
+    font-size: 12px;
+  }
 }
