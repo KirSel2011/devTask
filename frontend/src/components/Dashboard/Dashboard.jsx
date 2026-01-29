@@ -6,6 +6,8 @@ import classes from "./Dashboard.module.css"
 import FilterBar from "./FilterBar.jsx"
 import {deleteTask} from "./dashBoardApi.jsx"
 import TaskEditModal from "./TaskEditModal.jsx"
+import TaskNoteModal from "../../features/note/TaskNotesModal.jsx"
+// import DashboardMainView from "../DashboardMainView.jsx"
 //dasboard owns the taskdata and users, so it modifies the data
 //only in dashboar(source truth)
 export default function dashboard(){
@@ -18,6 +20,7 @@ export default function dashboard(){
   const [userFilter, setUserFilter] = useState("");
   const [sortAsc, setSortAsc] = useState(true);
   const [selectedTask, setSelectedTask] = useState(null);
+  const [selectedTaskForNotes, setSelectedTaskForNotes]= useState(null)
 
     const navigate = useNavigate();
     const token = localStorage.getItem('token');
@@ -133,6 +136,16 @@ if (!task || !task._id) {
    }
      
 };
+function handleAddNote(task){
+  
+  if (!task || !task._id) {
+  console.log("Task is missing _id!");
+  return;
+  
+}
+console.log("onAddNote onAddNote triggered in dashboard?")
+  setSelectedTaskForNotes( task)
+}
 function handleEditmodal(task){
   console.log("From HanldleEditmodal task: ", task)
   console.log("@top HandleEditModal is triggered! ")
@@ -140,6 +153,7 @@ function handleEditmodal(task){
   console.log("Task is missing _id!");
   return;
 }
+
  console.log("@bottom HandleEditModal is triggered! ")
   setSelectedTask(task);
 }
@@ -157,15 +171,23 @@ async function handleDeleteTask(id) {
   }
   
 }
-    return <>{(selectedTask)?(
+    return <>{(selectedTask)&&(
   <TaskEditModal
     users={usersTask || []}
     task={selectedTask}
     onClose={() => setSelectedTask(null)}
     onSave={handleUpdateTask}
-  />
-):(
-        <div >
+  />)}
+  {(selectedTaskForNotes) &&
+  <TaskNoteModal
+    users={usersTask || []}
+    task={selectedTaskForNotes}
+    onClose={() => setSelectedTaskForNotes(null)}
+    token={token}
+   
+  />}
+
+  <div >
     <header className={classes.dashboardHeader}>
              <h1>Task Dashboard</h1>
             <p>View and manage tasks by assigned user</p>
@@ -186,9 +208,9 @@ async function handleDeleteTask(id) {
                 <button className={classes.kanbanBtn} onClick={()=>setViewStatus("kanbanView")}>Kanban View</button>
             </div>
 
-            {(viewStatus === "listView") && <TaskList  tasks ={filteredTasks} onDelete={handleDeleteTask} onEdit={handleEditmodal}/> }
-            {(viewStatus === "kanbanView") && <KanbanBoard  tasks ={filteredTasks} onDelete={handleDeleteTask} onEdit={handleEditmodal} /> }
+            {(viewStatus === "listView") && <TaskList  tasks ={filteredTasks} onAddNote={handleAddNote} onDelete={handleDeleteTask} onEdit={handleEditmodal}/>  }
+            {(viewStatus === "kanbanView") && <KanbanBoard  tasks ={filteredTasks} onDelete={handleDeleteTask} onEdit={handleEditmodal}  /> }
 
         </div>
-    )} </>
+     </>
 }

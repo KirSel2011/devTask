@@ -15,7 +15,7 @@ import ProfileViewPage from "../features/profile/pages/ProfileViewPage.jsx";
 import ProtectedRoute from "../features/profile/components/ProtectedRoute.jsx";
 import ProfileForm from "../features/profile/pages/ProfileForm.jsx";
 import EditForm from "../components/Dashboard/EditForm.jsx";
-
+import TaskNotes from "../features/note/components/PersonalTaskNote.jsx";
 
 const router = createBrowserRouter([ 
     { 
@@ -47,6 +47,11 @@ const router = createBrowserRouter([
               <ProtectedRoute>
                  <TaskPage />
               </ProtectedRoute>},
+         /*  {path: "/task/:id/notes", element:
+             <ProtectedRoute>
+                <TaskNotes />
+             </ProtectedRoute>
+          }, */
           { path: "/profile/edit/:id", element:  
                <ProtectedRoute>
                  <EditProfilePage/>

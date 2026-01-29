@@ -1,7 +1,7 @@
 .taskrow{
     
      border: 1px solid #ddd;
-     text-align: center;
+     text-align:left;
      
 }.listBtnWrapper{
      display:flex;
@@ -19,7 +19,16 @@
   cursor: pointer;
   transition: 0.2s;
 }
+.viewBtn {
+  background-color: #3498db;
+  color: white;
+}
+.addNoteBtn{
 
+  background-color: #3498db;
+  color: white;
+
+}
 .editBtn:hover {
   background: #f4f4f4;
   border-color: #888;

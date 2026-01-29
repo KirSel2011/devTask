@@ -55,3 +55,21 @@ export async function fetchTasks(token){
         }
     return response.json();
 }
+export async function fetchDetailTask(id){
+     const response = await fetch(`http://localhost:3000/api/tasks/${id}`,{
+            headers:{
+                'authorization': `Bearer ${token}`
+                // 'id'           :`${id}`
+                //'authorization':`Bearer ${localStorage.getItem('token')}`
+            }
+        });
+        if(!response.ok){
+            //throw new Error({message:`resources not found: ${response.status}`})
+            console.log("Resources not found")
+        }if(response.status === 401){
+            localStorage.removeItem('token');
+            navigate("/login")
+            return;
+        }
+    return response.json();
+}

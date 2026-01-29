@@ -50,7 +50,11 @@ import { fetchListOfUsers } from "../taskService.js";
            console.log("TaskForm dueDate read by handleOnchange: ", value) */
           
         }
-       
+       value = {
+    year: parseInt(year),
+    month: parseInt(month),
+    day: parseInt(day)
+};
         console.log("What is the value of date outside if clause: ", value)
         setTaskInput((prev)=>{
             return {
@@ -115,14 +119,17 @@ import { fetchListOfUsers } from "../taskService.js";
         id="title"   
         name="title" 
         label="Title"
+        maxLength= '100'
         value={taskInput.title}
         onChange={(event)=>handleOnChange(event, "title")}
+        required
      />
          <Input 
         type= "text" 
         id="description"   
         name="description" 
         label="Description"
+        maxLength= '500'
         value={taskInput.description}
         onChange={(event)=>handleOnChange(event, 'description')}
     />  

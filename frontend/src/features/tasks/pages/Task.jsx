@@ -9,6 +9,7 @@ import { fetchTasks } from "../taskService.js";
     //const {id} = useParams();
     const navigate = useNavigate();
     const token = localStorage.getItem('token');
+    console.log("Token in TaskPage currently is : ", token)
     useEffect(()=>{
         async function getTask(){
             

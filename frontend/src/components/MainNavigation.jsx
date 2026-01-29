@@ -28,11 +28,11 @@ function MainNavigation() {
            {/* {isAuthenticated && <Link to="/dashboard">Dashboard</Link>} */}
             <Link to="/dashBoard">DashBoard</Link>
           </li>
-          {user.id && (
+         {/*  {user.id && (
             <li className={classes.listItem}>
               <Link to={`/tasks/${user.id}`}>TaskPage</Link>
             </li>
-          )}
+          )} */}
           <li className={classes.listItem}>
             <Link to="/task/new">CreateTask</Link>
           </li>

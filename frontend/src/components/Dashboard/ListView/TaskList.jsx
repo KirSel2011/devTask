@@ -1,7 +1,7 @@
 import TaskRow from "./TaskRow";
 import classes from "./TaskList.module.css";
 
-export default function TaskList({ tasks, onDelete, onEdit }) {
+export default function TaskList({ tasks, onDelete, onEdit, onAddNote }) {
   return (
     <div className={classes.tasklistWrapper}>
       <table className={classes.table}>
@@ -27,7 +27,7 @@ export default function TaskList({ tasks, onDelete, onEdit }) {
             </tr>
           )}
           {tasks?.map((task) => (
-            <TaskRow key={task._id} task={task} onDelete={onDelete} onEdit={onEdit} />
+            <TaskRow key={task._id} task={task} onDelete={onDelete} onEdit={onEdit} onAddNote={onAddNote} />
           ))}
         </tbody>
       </table>

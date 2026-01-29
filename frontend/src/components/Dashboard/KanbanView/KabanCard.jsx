@@ -8,7 +8,7 @@ export default function KanbanCard({task, onDelete, onEdit}){
     return <div className={classes.taskDescription} >
          <strong>Title: {task.title}</strong>
          <p>Description: {task.description}</p>
-          {!task.status? <p>Status: {task.status}</p>:''}
+          <p>Status: {task.status}</p>
           <p>AssignedTo: {task.assignedTo?.name  || "UnassignedTo"}</p>
           <p>Due: {task.dueDate.split("T")[0]}</p>
              
